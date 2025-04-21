@@ -6,6 +6,11 @@ This module will
 -Filter/Sort car dataset
 """
 
+# We will be pulling information (data) from Cargurus and Carvana
+
+
+
+
 class CarDatabase:
     """
     Class for the CarDatabase
@@ -26,3 +31,13 @@ class CarDatabase:
             bool: will be true is the load is successful, if not it will be false
         """
         # need to work on code and car data file
+
+    # def budget_filtering (1st filtering option I thought of)
+
+    # def make_filtering
+
+    # def model_filtering
+
+    # def year_filtering
+
+    # def results_filtering
