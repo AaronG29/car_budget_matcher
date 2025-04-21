@@ -112,4 +112,4 @@ def user_car_year():
     
     return (min_year, max_year)
 
-    # min year subject to change depending on data
+    # the min year is still subject to change depending on data and may need to be changed
