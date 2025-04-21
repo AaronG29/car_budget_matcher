@@ -1,5 +1,5 @@
 """
-This module will test the car dataset
+This module will test the car database and filters
 """
 
 from car_data import CarDatabase
