@@ -2,19 +2,24 @@
 This module will be used to test the user recommendations
 """
 
-from user_input import user_car_budget
-from user_input import user_car_make
-from user_input import user_car_year
+from car_data import CarDatabase
+
 
 # can make this more efficient
 
 class TestRecommendations():
     """Tests user preference recommendations"""
+
+    def setup_method(self):
+        self.db = CarDatabase()
+        success = self.db.load_data("carvana.csv")
+        assert success, "Failed to load carvana.csv"
     
     def test_recommendation_budget(self):
         """Test making sure that cars will match the users budget range"""
         # This is where the test will go
-        pass
+        result = self.db.filter_by_budget(16000, 24000)
+        assert all(10000 <= float(car['Price']) <= 20000 for car in result)
     
     def test_recommendation_make(self):
         """Test making sure that cars will match the users make/makes"""
