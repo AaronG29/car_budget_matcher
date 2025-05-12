@@ -16,7 +16,7 @@ def load_cars_from_csv(filename):
                 "name": row["Name"].strip(),
                 "year": int(row["Year"]),
                 "miles": int(row["Miles"]),
-                "price": int(row["Price "].strip())
+                "price": int(row["Price"].strip())
             }
             car_list.append(car)
     return car_list
@@ -139,14 +139,14 @@ def main():
     # loads data from carvana.csv
     filename = "carvana.csv"
     car_list = load_cars_from_csv(filename)
-
+ 
     # will get the users preferences for cars
     min_price, max_price = user_car_budget()
     preferred_makes = user_car_make()
-    min_year, _ = user_car_year()
-
+    min_year, max_year = user_car_year()
+    
     # filters the cars
-    matching_cars = filter_cars(car_list, min_price, max_price, preferred_makes, min_year)
+    matching_cars = filter_cars(car_list, min_price, max_price, preferred_makes, min_year, max_year)
 
     # shows the user their results
     print("\nMatching Cars:\n" + "-" * 30)
