@@ -118,3 +118,17 @@ def user_car_year():
             print("Not a valid maximum year")
     
     return (min_year, max_year)
+
+def filter_cars(car_list, min_price, max_price, preferred_makes, min_year, max_year):
+    filtered = []
+    for car in car_list:
+        name = car["name"].lower()
+        year = car["year"]
+        price = car["price"]
+
+        if (min_price <= price <= max_price and
+            min_year <= year <= max_year and
+            any(make in name for make in preferred_makes)):
+            filtered.append(car)
+
+    return filtered
