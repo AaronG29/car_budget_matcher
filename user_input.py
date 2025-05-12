@@ -1,13 +1,25 @@
 """
 User input module for car prefences
 
-This module will have the user input their prefered car 
--budget
--make
--year
+This module will have the user input their prefered car name, year, miles price
 """
 
 import datetime
+import csv
+
+def load_cars_from_csv(filename):
+    car_list = []
+    with open(filename, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            car = {
+                "name": row["Name"].strip(),
+                "year": int(row["Year"]),
+                "miles": int(row["Miles"]),
+                "price": int(row["Price "].strip())
+            }
+            car_list.append(car)
+    return car_list
 
 def user_car_budget():
     """
@@ -45,7 +57,6 @@ def user_car_budget():
     
     return (min_price, max_price)
 
-    # may need to show the users a set range depending on our data
 
 def user_car_make():
     """
@@ -74,8 +85,6 @@ def user_car_make():
             
         print("No valid make given")
 
-        # may need to give the user a list of makes to choose from depending on our car data
-
 def user_car_year():
     """
     User will input their desired car year range into the prompt
@@ -89,7 +98,7 @@ def user_car_year():
     # min year
     while True:
         try:
-            min_year = int(input(f"Enter minimum prefered year (1900-{current_year}): ").strip())
+            min_year = int(input(f"Enter minimum preferred year (1900-{current_year}): ").strip())
             if min_year < 1900 or min_year > current_year:
                 print(f"The year must be between 1900 and {current_year}.")
                 continue
@@ -97,12 +106,10 @@ def user_car_year():
         except ValueError:
             print("Not a valid minimum year")
 
-    # the year 1900 is subject to change depending on our data
-
     # max year
     while True:
         try:
-            max_year = int(input(f"Enter maximum prefered year ({min_year}-{current_year}): ").strip())
+            max_year = int(input(f"Enter maximum preferred year ({min_year}-{current_year}): ").strip())
             if max_year < min_year or max_year > current_year:
                 print(f"Year must be between {min_year} and {current_year}.")
                 continue
@@ -111,5 +118,3 @@ def user_car_year():
             print("Not a valid maximum year")
     
     return (min_year, max_year)
-
-    # the min year is still subject to change depending on data and may need to be changed
