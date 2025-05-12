@@ -65,3 +65,25 @@ class CarDatabase:
             except (KeyError, IndexError):
                 continue
         return filtered
+    
+    def filter_by_year(self, min_year, max_year):
+        filtered = []
+        for car in self.data:
+            try:
+                year = int(car['Year'])
+                if 1900 <= year <= 2025 and min_year <= year <= max_year:
+                    filtered.append(car)
+            except (ValueError, KeyError):
+                continue
+        return filtered
+    
+    def filter_by_miles(self, min_miles, max_miles):
+        filtered = []
+        for car in self.data:
+            try:
+                miles = int(car['Miles'])
+                if min_miles <= miles <= max_miles:
+                    filtered.append(car)
+            except (ValueError, KeyError):
+                continue
+        return filtered
