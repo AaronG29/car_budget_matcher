@@ -42,15 +42,26 @@ class CarDatabase:
         except Exception as e:
             print(f"Error loading data: {e}")
             return False
-        
-        # need to work on code and car data file
+    
+    def filter_by_budget(self, min_price, max_price):
 
-    # def budget_filtering (1st filtering option I thought of)
+        filtered = []
+        for car in self.data:
+            try:
+                price = float(car['Price'])
+                if min_price <= price <= max_price:
+                    filtered.append(car)
+            except (ValueError, KeyError):
+                continue
+        return filtered
 
-    # def make_filtering
-
-    # def model_filtering
-
-    # def year_filtering
-
-    # def results_filtering
+    def filter_by_make(self, makes):
+        filtered = []
+        for car in self.data:
+            try:
+                make = car['Name'].split()[0].lower()
+                if make in makes:
+                    filtered.append(car)
+            except (KeyError, IndexError):
+                continue
+        return filtered
