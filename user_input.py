@@ -5,21 +5,6 @@ This module will have the user input their prefered car name, year, miles price
 """
 
 import datetime
-import csv
-
-def load_cars_from_csv(filename):
-    car_list = []
-    with open(filename, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            car = {
-                "name": row["Name"].strip(),
-                "year": int(row["Year"]),
-                "miles": int(row["Miles"]),
-                "price": int(row["Price "].strip())
-            }
-            car_list.append(car)
-    return car_list
 
 def user_car_budget():
     """
@@ -118,3 +103,5 @@ def user_car_year():
             print("Not a valid maximum year")
     
     return (min_year, max_year)
+
+    # the min year is still subject to change depending on data and may need to be changed
