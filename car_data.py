@@ -87,3 +87,9 @@ class CarDatabase:
             except (ValueError, KeyError):
                 continue
         return filtered
+    
+    def sort_results(self, cars, sort_key='Price', reverse=False):
+        try:
+            return sorted(cars, key=lambda car: float(car[sort_key]), reverse=reverse)
+        except (KeyError, ValueError):
+            return cars
