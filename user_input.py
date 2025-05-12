@@ -5,6 +5,21 @@ This module will have the user input their prefered car name, year, miles price
 """
 
 import datetime
+import csv
+
+def load_cars_from_csv(filename):
+    car_list = []
+    with open(filename, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            car = {
+                "name": row["Name"].strip(),
+                "year": int(row["Year"]),
+                "miles": int(row["Miles"]),
+                "price": int(row["Price"].strip())
+            }
+            car_list.append(car)
+    return car_list
 
 def user_car_budget():
     """
@@ -104,4 +119,42 @@ def user_car_year():
     
     return (min_year, max_year)
 
-    # the min year is still subject to change depending on data and may need to be changed
+def filter_cars(car_list, min_price, max_price, preferred_makes, min_year, max_year):
+    filtered = []
+    for car in car_list:
+        name = car["name"].lower()
+        year = car["year"]
+        price = car["price"]
+
+        if (min_price <= price <= max_price and
+            min_year <= year <= max_year and
+            any(make in name for make in preferred_makes)):
+            filtered.append(car)
+
+    return filtered
+
+def main():
+    print("This is a Car Matching Tool to help you find a suitable car for you")
+    
+    # loads data from carvana.csv
+    filename = "carvana.csv"
+    car_list = load_cars_from_csv(filename)
+ 
+    # will get the users preferences for cars
+    min_price, max_price = user_car_budget()
+    preferred_makes = user_car_make()
+    min_year, max_year = user_car_year()
+    
+    # filters the cars
+    matching_cars = filter_cars(car_list, min_price, max_price, preferred_makes, min_year, max_year)
+
+    # shows the user their results
+    print("\nMatching Cars:\n" + "-" * 30)
+    if matching_cars:
+        for car in matching_cars:
+            print(f"{car['year']} {car['name']} - {car['miles']} miles - ${car['price']}")
+    else:
+        print("There are no cars that match your current selected preferences")
+
+if __name__ == "__main__":
+    main()
