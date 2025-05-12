@@ -24,7 +24,8 @@ class TestRecommendations():
     def test_recommendation_make(self):
         """Test making sure that cars will match the users make/makes"""
         # This is where the test will go
-        pass
+        result = self.db.filter_by_make(['toyota', 'honda'])
+        assert all(car['Name'].split()[0].lower() in ['toyota', 'honda'] for car in result)
 
     def test_recommendation_year(self):
         """Test making sure that cars will match the users year"""
