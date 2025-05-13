@@ -6,7 +6,7 @@ This module will
 -Filter/Sort car dataset
 """
 
-# We will be pulling information (data) from Cargurus and Carvana
+# We will be pulling information (data) from Carvana
 
 import csv
 
@@ -17,22 +17,21 @@ class CarDatabase:
     Class for the CarDatabase
     
     Attributes:
-        data (list): disctionary for car list
+        data (list): dictionary for car list
         filters (dict): filters for car data
     """
     def __init__(self):
         self.data = []
-        """Initializes the car database (empty)"""
     
     def load_data(self, filepath):
         """
-        Loads the car data from the carvana.csv file, puts it into database
+        Loads the car data from a file
         
         Args:
             filepath (str): the path to car data file
             
         Returns:
-            bool: will be true if the load is successful, if not it will be false
+            bool: will be true is the load is successful, if not it will be false
         """
 
         try:
@@ -44,8 +43,9 @@ class CarDatabase:
             print(f"Error loading data: {e}")
             return False
     
-    def filter_by_budget(self, min_price, max_price):
-
+    def filter_by_budget(self, min_price, max_price, cars=None):
+        if cars is None:
+            cars = self.data
         filtered = []
         for car in cars:
 
@@ -57,7 +57,9 @@ class CarDatabase:
                 continue
         return filtered
 
-    def filter_by_make(self, makes):
+    def filter_by_make(self, makes, cars=None):
+        if cars is None:
+            cars = self.data
         filtered = []
         for car in cars:
 
