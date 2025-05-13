@@ -158,3 +158,28 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+def user_car_miles():
+    print("\nMileage Preferences:")
+    while True:
+        try:
+            min_miles = int(input("Enter minimum miles: ").strip())
+            if min_miles < 0:
+                print("Miles can't be negative")
+                continue
+
+            break
+        except ValueError:
+            print("Please enter a valid number for minimum miles")
+
+    while True:
+        try:
+            max_miles = int(input(f"Enter maximum miles (must be >= {min_miles}): ").strip())
+            if max_miles < min_miles:
+                print("Maximum must be greater than or equal to minimum.")
+                continue
+            break
+        except ValueError:
+            print("Please enter a valid number for maximum miles")
+    
+    return (min_miles, max_miles)
