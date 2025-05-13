@@ -11,6 +11,7 @@ class TestRecommendations():
     """Tests user preference recommendations"""
 
     def setup_method(self):
+        """Loads the carvana.csv dataset that will be used to make recommendations based on the cars in the datset"""
         self.db = CarDatabase()
         success = self.db.load_data("carvana.csv")
         assert success, "Failed to load carvana.csv"
@@ -28,14 +29,13 @@ class TestRecommendations():
         assert all(car['Name'].split()[0].lower() in ['toyota', 'honda'] for car in result)
 
     def test_recommendation_year(self):
-        """Test making sure that cars will match the users year"""
+        """Test making sure that cars will match the users preferred year/years"""
         # This is where the test will go
         result = self.db.filter_by_year(2016, 2018)
         assert all(2015 <= int(car['Year']) <= 2023 for car in result)
 
-    
     def test_sort_by_recommendation(self):
-        """Test that cars are sorted"""
+        """Test that cars are sorted, the sorting will be done by price (least/greatest -- cheapest car - most expensive car)"""
         # This is where the test will go
         cars = self.db.filter_by_budget(5500, 11000)
         sorted_result = self.db.sort_results(cars, sort_key='Price', reverse=False)
