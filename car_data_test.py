@@ -25,7 +25,7 @@ class TestCarDatabase():
     
     def test_budget(self):
         """Test for filtering the cars by their max price"""
-        results = self.db.filter_by_budget(15000)
+        results = self.db.filter_by_budget(5000, 15000)
         car_names = [car["Name"] for car in results]
         assert "Ford Focus" in car_names
         assert "Mazda 5" in car_names
@@ -34,13 +34,13 @@ class TestCarDatabase():
 
     def test_make(self):
         """Filter by the car make test"""
-        results = self.db.filter_by_make("Toyota")
+        results = self.db.filter_by_make("toyota")
         assert len(results) == 1
         assert results[0]["Name"] == "Toyota Corolla"
 
     def test_year(self):
         """Filter by the car min year test"""
-        results = self.db.filter_by_year(2018)
+        results = self.db.filter_by_year(2018, 2023)
         car_names = [car["Name"] for car in results]
         assert "Tesla Model Y" in car_names
         assert "Toyota Corolla" in car_names
