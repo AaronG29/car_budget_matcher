@@ -22,16 +22,17 @@ class CarDatabase:
     """
     def __init__(self):
         self.data = []
+        """Initializes the car database (empty)"""
     
     def load_data(self, filepath):
         """
-        Loads the car data from a file
+        Loads the car data from the carvana.csv file, puts it into database
         
         Args:
             filepath (str): the path to car data file
             
         Returns:
-            bool: will be true is the load is successful, if not it will be false
+            bool: will be true if the load is successful, if not it will be false
         """
 
         try:
@@ -44,6 +45,15 @@ class CarDatabase:
             return False
     
     def filter_by_budget(self, min_price, max_price):
+        """Filters the cars displayed based off the user's inputted budget
+
+        args:
+
+        min_price: minimum price
+        max_price: maximum price
+
+        returns: the cars that match the users inputted budget (price range)
+        """
 
         filtered = []
         for car in self.data:
@@ -56,6 +66,12 @@ class CarDatabase:
         return filtered
 
     def filter_by_make(self, makes):
+        """ Filters the cars displayed based off the users inputted car make (the make of the car they desire)
+
+        args: list of car make/makes
+
+        returns: cars make that are of the users preferences.
+        """
         filtered = []
         for car in self.data:
             try:
