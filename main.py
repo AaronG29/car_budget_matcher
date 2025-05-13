@@ -29,7 +29,7 @@ def main():
     results = db.sort_results(results, sort_key='Price')
 
     # Results printed... will print out and display the top 5 results/matches
-    print(f"\n🎯 Found {len(results)} matching cars:\n")
+    print(f"\n The top 5 car matches has {len(results)} matching cars:\n")
     if results:
         for car in results[:5]:
             print(f"{car['Year']} {car['Name']} - {car['Miles']} miles - ${car['Price']}")
