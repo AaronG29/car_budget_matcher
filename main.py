@@ -21,15 +21,16 @@ def main():
 
 # Filters here...
     results = db.filter_by_budget(min_price, max_price)
-    results = db.filter_by_make(makes)
-    results = db.filter_by_year(min_year, max_year)
-    results = db.filter_by_miles(min_miles, max_miles)
+    results = db.filter_by_make(makes, results)
+    results = db.filter_by_year(min_year, max_year, results)
+    results = db.filter_by_miles(min_miles, max_miles, results)
+
 
 # Price sorted low to high
     results = db.sort_results(results, sort_key='Price')
 
     # Results printed... will print out and display the top 5 results/matches
-    print(f"\n The top 5 car matches has {len(results)} matching cars:\n")
+    print(f"\n Found {len(results)} matching cars:\n")
     if results:
         for car in results[:5]:
             print(f"{car['Year']} {car['Name']} - {car['Miles']} miles - ${car['Price']}")
