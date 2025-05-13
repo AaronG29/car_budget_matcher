@@ -34,7 +34,7 @@ class TestCarDatabase():
 
     def test_make(self):
         """Filter by the car make test"""
-        results = self.db.filter_by_make("toyota")
+        results = self.db.filter_by_make(["toyota"])
         assert len(results) == 1
         assert results[0]["Name"] == "Toyota Corolla"
 
