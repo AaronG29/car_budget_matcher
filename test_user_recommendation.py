@@ -30,10 +30,14 @@ class TestRecommendations():
     def test_recommendation_year(self):
         """Test making sure that cars will match the users year"""
         # This is where the test will go
-        pass
+        result = self.db.filter_by_year(2016, 2018)
+        assert all(2015 <= int(car['Year']) <= 2023 for car in result)
 
     
     def test_sort_by_recommendation(self):
         """Test that cars are sorted"""
         # This is where the test will go
-        pass
+        cars = self.db.filter_by_budget(5500, 11000)
+        sorted_result = self.db.sort_results(cars, sort_key='Price', reverse=False)
+        prices = [float(car['Price']) for car in sorted_result]
+        assert prices == sorted(prices)
