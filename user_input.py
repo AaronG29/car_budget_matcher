@@ -133,32 +133,6 @@ def filter_cars(car_list, min_price, max_price, preferred_makes, min_year, max_y
 
     return filtered
 
-def main():
-    print("This is a Car Matching Tool to help you find a suitable car for you")
-    
-    # loads data from carvana.csv
-    filename = "carvana.csv"
-    car_list = load_cars_from_csv(filename)
- 
-    # will get the users preferences for cars
-    min_price, max_price = user_car_budget()
-    preferred_makes = user_car_make()
-    min_year, max_year = user_car_year()
-    
-    # filters the cars
-    matching_cars = filter_cars(car_list, min_price, max_price, preferred_makes, min_year, max_year)
-
-    # shows the user their results
-    print("\nMatching Cars:\n" + "-" * 30)
-    if matching_cars:
-        for car in matching_cars:
-            print(f"{car['year']} {car['name']} - {car['miles']} miles - ${car['price']}")
-    else:
-        print("There are no cars that match your current selected preferences")
-
-if __name__ == "__main__":
-    main()
-
 def user_car_miles():
     print("\nMileage Preferences:")
     while True:

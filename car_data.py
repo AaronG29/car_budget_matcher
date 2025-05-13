@@ -45,18 +45,10 @@ class CarDatabase:
             return False
     
     def filter_by_budget(self, min_price, max_price):
-        """Filters the cars displayed based off the user's inputted budget
-
-        args:
-
-        min_price: minimum price
-        max_price: maximum price
-
-        returns: the cars that match the users inputted budget (price range)
-        """
 
         filtered = []
-        for car in self.data:
+        for car in cars:
+
             try:
                 price = float(car['Price'])
                 if min_price <= price <= max_price:
@@ -66,14 +58,9 @@ class CarDatabase:
         return filtered
 
     def filter_by_make(self, makes):
-        """ Filters the cars displayed based off the users inputted car make (the make of the car they desire)
-
-        args: list of car make/makes
-
-        returns: cars make that are of the users preferences.
-        """
         filtered = []
-        for car in self.data:
+        for car in cars:
+
             try:
                 make = car['Name'].split()[0].lower()
                 if make in makes:
@@ -82,9 +69,12 @@ class CarDatabase:
                 continue
         return filtered
     
-    def filter_by_year(self, min_year, max_year):
+    def filter_by_year(self, min_year, max_year, cars=None):
+        if cars is None:
+            cars = self.data
         filtered = []
-        for car in self.data:
+        for car in cars:
+
             try:
                 year = int(car['Year'])
                 if 1900 <= year <= 2025 and min_year <= year <= max_year:
@@ -93,9 +83,12 @@ class CarDatabase:
                 continue
         return filtered
     
-    def filter_by_miles(self, min_miles, max_miles):
+    def filter_by_miles(self, min_miles, max_miles, cars=None):
+        if cars is None:
+            cars = self.data
         filtered = []
-        for car in self.data:
+        for car in cars:
+
             try:
                 miles = int(car['Miles'])
                 if min_miles <= miles <= max_miles:
