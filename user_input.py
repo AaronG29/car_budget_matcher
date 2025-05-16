@@ -137,7 +137,7 @@ def user_car_year():
     return (min_year, max_year)
 
 def filter_cars(car_list, min_price, max_price, preferred_makes, min_year, max_year):
-def filter_cars(car_list, min_price, max_price, preferred_makes, min_year, max_year):
+
     """
     cars are filtered based on the users prefenence
 
