@@ -17,21 +17,18 @@ class CarDatabase:
     Class for the CarDatabase
     
     Attributes:
-        data (list): dictionary for car list
-        filters (dict): filters for car data
+        data: dictionary for car list
+        filters: filters for car data
     """
     def __init__(self):
         self.data = []
     
     def load_data(self, filepath):
         """
-        Loads the car data from a file
+        Loads the car data from our carvana.csv file
         
-        Args:
-            filepath (str): the path to car data file
-            
-        Returns:
-            bool: will be true is the load is successful, if not it will be false
+        args: filepaththe path to car data file
+        returns: bool, will be true is the load is successful, it will turn out as false if it's not
         """
 
         try:
@@ -44,6 +41,15 @@ class CarDatabase:
             return False
     
     def filter_by_budget(self, min_price, max_price, cars=None):
+        """
+        Filters a list of cars based off the price that the users inputs
+
+        args: 
+        min_price: user min price they set
+        max_price: user max price they set
+
+        returns: the filtered list if cars within the users specified budget
+        """
         if cars is None:
             cars = self.data
         filtered = []
