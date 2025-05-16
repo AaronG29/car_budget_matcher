@@ -1,13 +1,30 @@
 """
-User input module for car prefences
+User Input Module for Car Preferences
 
-This module will have the user input their prefered car name, year, miles price
+Module lets user put there preference for car name, year, price, and miles. Also filters to match cars based on what they put for their preferences.
+
+functions:
+-load_cars_from_csv
+-user_car_miles
+-user_car_year
+-user_car_make
+-user_car_budget
+-filter_cars
 """
 
 import datetime
 import csv
 
 def load_cars_from_csv(filename):
+    """
+    Car data is loaded from the csv file
+
+    Args:
+        filename (str): the path to csv that has all the car data
+
+    Returns:
+        list: list of dictionaries that represents each car with a key, keys are name, year, miles, and price
+    """
     car_list = []
     with open(filename, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -120,6 +137,22 @@ def user_car_year():
     return (min_year, max_year)
 
 def filter_cars(car_list, min_price, max_price, preferred_makes, min_year, max_year):
+def filter_cars(car_list, min_price, max_price, preferred_makes, min_year, max_year):
+    """
+    cars are filtered based on the users prefenence
+
+    Args:
+        car_list (list): list for car dictionaries
+        min_price (float): min price
+        max_price (float): max price
+        preferred_makes (list): list of car makes that are filtered
+        min_year (int): min car year
+        max_year (int): max car yeare
+
+    Returns:
+        list: filtered list of cars that matches the preferences the user put in
+    """
+
     filtered = []
     for car in car_list:
         name = car["name"].lower()
